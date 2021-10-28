@@ -5,15 +5,17 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import Login from "./screens/Login";
 import Home from "./screens/Home";
+import Signup from"./screens/Signup";
 
 export default function App() {
   const MainNavigator = createStackNavigator();
 
   return (
-    <View style={styles.container}>
+    <View style={{flex:1}}>
       <NavigationContainer>
-        <MainNavigator.Navigator InitialRouteName="Login">
+        <MainNavigator.Navigator InitialRouteName="Signup">
           <MainNavigator.Screen name="Login" component={Login} />
+          <MainNavigator.Screen name="Signup" component={Signup} />
           {/* <MainNavigator.Screen name="Home" component={Home} /> */}
         </MainNavigator.Navigator>
       </NavigationContainer>
