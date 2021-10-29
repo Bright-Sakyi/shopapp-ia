@@ -5,13 +5,13 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import Login from "./screens/Login";
 import Home from "./screens/Home";
-import Signup from"./screens/Signup";
+import Signup from "./screens/Signup";
 
 export default function App() {
   const MainNavigator = createStackNavigator();
 
   return (
-    <View style={{flex:1}}>
+    <View style={{ flex: 1 }}>
       <NavigationContainer>
         <MainNavigator.Navigator InitialRouteName="Signup">
           <MainNavigator.Screen name="Login" component={Login} />
