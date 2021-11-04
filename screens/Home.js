@@ -1,10 +1,10 @@
 import React from "react";
 import { SafeAreaView, Text,TextInput, Dimensions, StyleSheet, View } from "react-native";
-import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
+import { ScrollView, TouchableOpacity, FlatList } from "react-native-gesture-handler";
 import Login from "./Login";
 import products from "../assets/products";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons"
-const { width } = Dimensions.get("screen");
+const { width } = Dimensions.get("screen").width/2-30
 
 export default function Home() {
     const categories = ["Men's clothes", "Women's clothes","Footwaer","Bags","Jewellery"];
@@ -32,13 +32,16 @@ export default function Home() {
             </View>
         );
     };
+    const Card = ({item}) => {
+        return <View style={style.Card}></View>
+    };
     return (
         <SafeAreaView style={{ backgroundColor: "white", flex: 1 }}>
             <View style={style.header}>
                 <Icon name="sort-variant" size={30} color={"Black"} />
                 <Icon name="cart-outline" size={30} color={"Black"} />
             </View>
-            <ScrollView showsVerticalScrollIndicator={false}>
+            <ScrollView showsVerticalScrollIndicator={true}>
                 <Text style={style.headerTitle}> Best Products For You</Text>
                 <View style={{
                     flexDirection:"row",
@@ -55,7 +58,13 @@ export default function Home() {
                 </View>
                 <Text style={style.categoriesTitle}> Categories </Text>
                     <CategoryList />
-                    <FlatList numColumns={2} data={products}/>
+                    <FlatList 
+                        columnWrapperStyle ={{justifyContent:"space-between"}}
+                        showsVerticalScrollIndicator={true}
+                        numColumns={2} 
+                        data={products} 
+                        renderItem= {(item)=> <Card products={item} />}
+                    />
                     
             </ScrollView>
 
@@ -72,9 +81,7 @@ const style = StyleSheet.create({
     categoriesContainer: {
         flexDirection:"row",
         justifyContent:"space-between",
-        padding: 20
-
-
+        padding:20 
     },
 
     header: {
@@ -141,6 +148,15 @@ const style = StyleSheet.create({
       borderColor:"#FFA500"
 
 
+    },
+    Card: {
+        height: 225,
+        backgroundColor:"#FFA500",
+        width,
+        borderRadius:16,
+        marginHorizontal: 2,
+        marginBottom: 20,
+        padding: 15
     }
     
 });
