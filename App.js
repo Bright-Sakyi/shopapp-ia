@@ -7,27 +7,25 @@ import Login from "./screens/Login";
 import Home from "./screens/Home";
 import Signup from "./screens/Signup";
 
+
 export default function App() {
   const MainNavigator = createStackNavigator();
 
   return (
     <View style={{ flex: 1 }}>
       <NavigationContainer>
-        <MainNavigator.Navigator InitialRouteName="Signup">
+        <MainNavigator.Navigator 
+          screenOptions={{ headerShown: false}}
+          InitialRouteName="Login">
           <MainNavigator.Screen name="Login" component={Login} />
+
           <MainNavigator.Screen name="Signup" component={Signup} />
+
           <MainNavigator.Screen name="Home" component={Home} />
+
         </MainNavigator.Navigator>
+
       </NavigationContainer>
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});

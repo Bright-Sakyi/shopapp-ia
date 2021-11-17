@@ -1,54 +1,127 @@
+import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { View, Text, Image, TextInput, StyleSheet, Button, scrollView } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import Signup from "./Signup";
-import Icon from "react-native-vector-icons/MaterialIcons"
-import { MaterialIcons } from '@expo/vector-icons';
+import {
+  StyleSheet,
+  Text,
+  SafeAreaView,
+  View,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native";
+import { TextInput } from "react-native-gesture-handler";
+import { Entypo } from "@expo/vector-icons";
 
-export default function Login({ navigation }) {
-
+export default function Signin({ navigation }) {
   return (
-
-    <View style={{ width: "100%", height: "100%", justifyContent: "center", alignItems: "center", alignSelf: "center", backgroundColor: "white" }}>
-      <Text style={{ color: "Black", fontSize: 50, fontWeight: "700" }}>Welcome Fashionista,</Text>
-      <Text style={{ color: "Black", marginTop: 20 }}>Sign in to continue</Text>
-
-      <View style={{ marginTop: 10, }}>
-
-        <View style={{ marginTop: 20, flexDirection: "row" }}>
-          <Icon name="mail-outline" size={22} style={{ marginTop: 22, position: "absolute", color: "blue" }} />
-          <TextInput placeholder="Email" style={{ borderColor: "#FFA500", paddingLeft: 30, flex: 1, borderBottomWidth: 0.5, fontSize: 20, marginTop: 13, borderRadius: 10, height: 35, width: "50%", borderWidth: 1 }} />
+    <SafeAreaView style={styles.container}>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View style={{ paddingTop: 40 }}>
+          <Text style={styles.textbig}>Hello{"\n"}There</Text>
         </View>
-
-        <View style={{ marginTop: 20, flexDirection: "row" }}>
-          <Icon name="lock-outline" size={22} style={{ marginTop: 22, position: "absolute", color: "blue" }} />
-          <TextInput placeholder="Password" style={{ borderColor: "#FFA500", paddingLeft: 30, flex: 1, borderBottomWidth: 0.5, fontSize: 20, marginTop: 13, borderRadius: 10, height: 35, width: "50%", borderWidth: 1 }} secureTextEntry />
+        <View style={{ paddingTop: 40 }}>
+          <Text style={{ color: "Black", marginTop: 10 }}>Sign In for a great experience </Text>
         </View>
-
-        <View style={{ marginTop: "5%", width: "88%" }}>
-          <TouchableOpacity onPress={() => navigation.navigate('Home')}
-            style={{
-              borderWidth: 1,
-              backgroundColor: "#FFA500",
-              height: 42,
-              width: "88%",
-              justifyContent: "center",
-              alignSelf: "center",
-              textAlign: "center",
-              borderRadius: 40,
-              marginTop: "50",
-
-            }}
-          >
-            <Text style={{ fontSize: 20, color: "white", fontWeight: "600" }}>Sign in</Text>
+        <View style={{ paddingTop: 40 }}>
+          <View style={styles.inputcon}>
+            <TextInput style={styles.input} placeholder="Email address" />
+          </View>
+          <View style={styles.inputcon}>
+            <TextInput style={styles.input} placeholder="Password" />
+          </View>
+        </View>
+        <View style={styles.inputcon}>
+            <Text 
+              style={{ fontSize: 20, 
+              color: "white", 
+              fontWeight: "600" }}
+              >
+                Sign In<TouchableOpacity onPress={() => navigation.navigate('Home')
+              }><Text style={{ 
+                color: "gray",
+                alalign: "center"
+                }}>Sign in</Text></TouchableOpacity> </Text>
+            
+          
+        </View>
+        <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "center",
+            alignContent: "center",
+          }}
+        >
+          <Text style={{ color: "gray", fontSize: 16 }}>
+            Don't have an account ?{" "}
+          </Text>
+          <TouchableOpacity onPress={() => navigation.navigate("Signup")}>
+            <Text
+              style={{ color: "#FFA500", fontSize: 16, fontWeight: "bold" }}
+            >
+              Sign up
+            </Text>
           </TouchableOpacity>
-
         </View>
-
-      </View>
-      <Text style={{ color: "Black", marginTop: 10 }}>Not having an account? <TouchableOpacity onPress={() => navigation.navigate('Signup')}><Text style={{ color: "#FFA500" }}>Sign up</Text></TouchableOpacity></Text>
-
-
-    </View>
+        <TouchableOpacity
+          style={{
+            flexDirection: "row",
+            justifyContent: "center",
+            paddingTop: 20,
+          }}
+        >
+          <Text style={{ color: "#8c736d", fontSize: 16, fontWeight: "bold" }}>
+            Forgot Password ?
+          </Text>
+        </TouchableOpacity>
+      </ScrollView>
+      <StatusBar style="auto" />
+    </SafeAreaView>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: "#fcfcfc",
+    paddingHorizontal: 10,
+    alignContent: "center",
+    paddingBottom: 20,
+  },
+  textbig: {
+    fontSize: 45,
+    padding: 5,
+    paddingVertical: 30,
+    fontWeight: "bold",
+    marginTop: 20,
+  },
+  inputcon: {
+    margin: 10,
+    backgroundColor: "white",
+    padding: 10,
+    borderRadius: 30,
+    borderWidth: 1,
+    borderColor: "#b8aaa7",
+  },
+  input: {
+    fontSize: 16,
+    paddingHorizontal: 10,
+  },
+  signtext: {
+    fontSize: 30,
+    padding: 5,
+    paddingVertical: 30,
+    fontWeight: "bold",
+  },
+  button: {
+    backgroundColor: "#FFA500",
+    borderRadius: 50,
+    padding: 10,
+  },
+  buttoncon: {
+    paddingTop: 40,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingHorizontal: 20,
+    paddingBottom: 10,
+  },
+});

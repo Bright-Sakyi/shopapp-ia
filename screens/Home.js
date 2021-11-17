@@ -1,162 +1,71 @@
-import React from "react";
-import { SafeAreaView, Text,TextInput, Dimensions, StyleSheet, View } from "react-native";
-import { ScrollView, TouchableOpacity, FlatList } from "react-native-gesture-handler";
-import Login from "./Login";
-import products from "../assets/products";
-import Icon from "react-native-vector-icons/MaterialCommunityIcons"
-const { width } = Dimensions.get("screen").width/2-30
+import React, { useEffect, useState } from "react";
+import { SafeAreaView, StyleSheet, Text, View, FlatList } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import ProductBox from "../assets/ProductBox";
+import Category from "../assets/Category";
+
+import Categories from "../assets/Categories";
+import TopBar from "../assets/TopBar"
 
 export default function Home() {
-    const categories = ["Men's clothes", "Women's clothes","Footwaer","Bags","Jewellery"];
+  const [loadedCat, setLoadedCat] = useState("All");
+  const [retrievedCat, setRetrievedCat] = useState();
 
-    const [categoryIndex,setCategoryIndex] = React.useState(0)
-    
-    const CategoryList = () => {
-        return (
-            <View style={style.categoriesContainer}>
-                {categories.map((item, index) => (
-                    <TouchableOpacity 
-                        key={index} 
-                        activeOpacity={0.8}
-                        onPress ={()=>setCategoryIndex(index)}>
-                         <Text 
-                        style={[
-                            style.categoryText,
-                            categoryIndex == index && style.categoryTextSelected 
-                        ]}>
-                        {item}
-                    </Text>  
-                    </TouchableOpacity>
-                         
-            ))}
-            </View>
-        );
-    };
-    const Card = ({item}) => {
-        return <View style={style.Card}></View>
-    };
-    return (
-        <SafeAreaView style={{ backgroundColor: "white", flex: 1 }}>
-            <View style={style.header}>
-                <Icon name="sort-variant" size={30} color={"Black"} />
-                <Icon name="cart-outline" size={30} color={"Black"} />
-            </View>
-            <ScrollView showsVerticalScrollIndicator={true}>
-                <Text style={style.headerTitle}> Best Products For You</Text>
-                <View style={{
-                    flexDirection:"row",
-                     justifyContent:"space-between",
-                     padding:20
-                     }}>
-                    <View style={style.searchInputContainer}>
-                        <Icon name="magnify" color="grey" size={25} />
-                        <TextInput placeholder="Search"  style={style.Input}/>
-                    </View>
-                    <View style={style.sortItems}>
-                        <Icon name="tune" color="blue" size={25} />
-                    </View>
-                </View>
-                <Text style={style.categoriesTitle}> Categories </Text>
-                    <CategoryList />
-                    <FlatList 
-                        columnWrapperStyle ={{justifyContent:"space-between"}}
-                        showsVerticalScrollIndicator={true}
-                        numColumns={2} 
-                        data={products} 
-                        renderItem= {(item)=> <Card products={item} />}
-                    />
-                    
-            </ScrollView>
-
-        </SafeAreaView>
-    );
-};
-
-
-
-
-
-
-const style = StyleSheet.create({
-    categoriesContainer: {
-        flexDirection:"row",
-        justifyContent:"space-between",
-        padding:20 
-    },
-
-    header: {
-        paddingHorizontal: 20,
-        flexDirection: "row",
-        paddingVertical: 20,
-        justifyContent: "space-between"
-
-    },
-    headerTitle: {
-      fontSize: 23,
-      fontWeight: "bold",
-      width: "55%",
-      lineHeight:30,
-      paddingHorizontal:20  
-    },
-    searchInputContainer: {
-      height: 50,
-      backgroundColor: "#FFA500",
-      flex:1,
-      borderRadius:10,
-      flexDirection: "row",
-      alignItems: "center",
-      paddingHorizontal: 20
-    },
-    sortItems: {
-        backgroundColor: "#FFA500",
-        Weight: 50,
-        height: 50,
-        borderRadius: 5,
-        justifyContent:"center",
-        alignItems:"center",
-        marginLeft: 5
-    },
-    categoriesTitle: {
-       fontSize:18,
-       fontWeight:"bold",
-       paddingHorizontal: 20,
-       
-    },
-    Input: {
-        fontsize: 20,
-        fontWeight:"bold",
-        color:"black",
-        flex: 1 
-        
-    },
-    categoriesContainer:{
-        flexDirection: "row",
-        marginTop: 30,
-        marginBottom:20,
-        justifyContent: "space-between"
-
-    },
-    categoryText: {
-      fontSize:16,
-      color: "grey",
-      fontWeight:"bold"  
-    },
-    categoryTextSelected:{
-      color:"#FFA500",
-      paddingBottom: 5,
-      borderBottomWidth:2,
-      borderColor:"#FFA500"
-
-
-    },
-    Card: {
-        height: 225,
-        backgroundColor:"#FFA500",
-        width,
-        borderRadius:16,
-        marginHorizontal: 2,
-        marginBottom: 20,
-        padding: 15
+  useEffect(() => {
+    if (loadedCat === "All") {
+      setRetrievedCat(Products);
+    } else {
+      setRetrievedCat(Category[loadedCat]);
     }
-    
+  }, [loadedCat]);
+
+  return (
+    <SafeAreaView style={styles.page}>
+      <TopBar />
+      <View>
+        <Text style={styles.bigtext}>Discover our exclusive products</Text>
+      </View>
+
+      <View style={{ paddingBottom: 10 }}>
+        <FlatList
+          data={Categories}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({ item }) => (
+            <TouchableOpacity onPress={() => setLoadedCat(item.category)}>
+              <CategoriesBar categories={item} />
+            </TouchableOpacity>
+          )}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={{
+            alignItems: "center",
+            marginVertical: 5,
+          }}
+        />
+      </View>
+
+      <View style={{ flex: 1 }}>
+        <FlatList
+          data={retrievedCat}
+          renderItem={({ item }) => <ProductBox product={item} />}
+          numColumns={2}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{ alignItems: "center" }}
+        />
+      </View>
+    </SafeAreaView>
+  );
+}
+
+const styles = StyleSheet.create({
+  page: {
+    flex: 1,
+    paddingHorizontal: 10,
+    backgroundColor: "#fcfcfc",
+  },
+
+  bigtext: {
+    fontSize: 30,
+    marginBottom: 20,
+  },
 });
