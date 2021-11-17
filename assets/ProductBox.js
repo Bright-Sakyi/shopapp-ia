@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View, Image, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/core";
+import colors from "./colors";
 
 export default function ProductBox({ product }) {
   const navigation = useNavigation();
@@ -12,16 +13,18 @@ export default function ProductBox({ product }) {
   const { title, price, image } = product;
 
   return (
-    <TouchableOpacity onPress={onPress} style={styles.container}>
-      <Image
-        style={styles.img}
-        source={{
-          uri: image,
-        }}
-      />
-      <Text style={styles.prodname}>{title}</Text>
-      <Text style={styles.price}>{`$${price}`} </Text>
-    </TouchableOpacity>
+    <View>
+      <TouchableOpacity onPress={onPress} style={styles.container}>
+        <Image
+          style={styles.img}
+          source={{
+            uri: image,
+          }}
+        />
+        <Text style={styles.prodname}>{title}</Text>
+        <Text style={styles.price}>{`$${price}`} </Text>
+      </TouchableOpacity>
+    </View>
   );
 }
 
@@ -34,7 +37,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     borderRadius: 20,
     borderWidth: 1,
-    borderColor: "#b8aaa7",
+    borderColor: colors.secondary,
     width: "45%",
     paddingVertical: 10,
   },
@@ -50,6 +53,6 @@ const styles = StyleSheet.create({
   },
   price: {
     fontSize: 19,
-    color: "#8c736d",
+    color: colors.primary,
   },
 });

@@ -67,10 +67,8 @@ export default function Signin({ navigation }) {
             justifyContent: "center",
             paddingTop: 20,
           }}
-        >
-          <Text style={{ color: "#8c736d", fontSize: 16, fontWeight: "bold" }}>
-            Forgot Password ?
-          </Text>
+        >                                     
+         
         </TouchableOpacity>
       </ScrollView>
       <StatusBar style="auto" />

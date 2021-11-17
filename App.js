@@ -6,6 +6,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import Login from "./screens/Login";
 import Home from "./screens/Home";
 import Signup from "./screens/Signup";
+import Cart from "./screens/Cart";
+
 
 
 export default function App() {
@@ -22,6 +24,10 @@ export default function App() {
           <MainNavigator.Screen name="Signup" component={Signup} />
 
           <MainNavigator.Screen name="Home" component={Home} />
+
+          <MainNavigator.Screen name="cart" component={Cart} />
+
+
 
         </MainNavigator.Navigator>
 

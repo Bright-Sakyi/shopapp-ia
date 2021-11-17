@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { SafeAreaView, StyleSheet, Text, View, FlatList } from "react-native";
+import { SafeAreaView, StyleSheet, Text, View, FlatList, Image } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import ProductBox from "../assets/ProductBox";
+import ProductBox from "../assets/productBox";
 import Category from "../assets/Category";
-
+import CategoriesBar from "../assets/CategoriesBar";
+import products from "../assets/products";
 import Categories from "../assets/Categories";
 import TopBar from "../assets/TopBar"
+import colors from "../assets/colors";
 
 export default function Home() {
   const [loadedCat, setLoadedCat] = useState("All");
@@ -13,7 +15,7 @@ export default function Home() {
 
   useEffect(() => {
     if (loadedCat === "All") {
-      setRetrievedCat(Products);
+      setRetrievedCat(products);
     } else {
       setRetrievedCat(Category[loadedCat]);
     }
@@ -51,6 +53,7 @@ export default function Home() {
           numColumns={2}
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{ alignItems: "center" }}
+          columsWrapperStyle={{ justifyContent: "center"}}
         />
       </View>
     </SafeAreaView>
@@ -61,11 +64,13 @@ const styles = StyleSheet.create({
   page: {
     flex: 1,
     paddingHorizontal: 10,
-    backgroundColor: "#fcfcfc",
+    backgroundColor: colors.background
   },
 
   bigtext: {
     fontSize: 30,
     marginBottom: 20,
+    color: colors.text,
+    paddingLeft: 10,
   },
 });
