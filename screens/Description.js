@@ -8,11 +8,10 @@ import {
   ScrollView,
   TouchableOpacity,
 } from "react-native";
-import Products from "../assets/data/Products";
+import Products from "../assets/products";
 import { Feather, FontAwesome } from "@expo/vector-icons";
 import { useRoute } from "@react-navigation/core";
-import TopBar from "../components/TopBar";
-
+import TopBar from "../assets/TopBar";
 import colors from "../assets/colors";
 
 export default function Description() {

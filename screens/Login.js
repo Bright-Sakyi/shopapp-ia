@@ -79,7 +79,7 @@ export default function Signin({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fcfcfc",
+    backgroundColor: "#79BCC7",
     paddingHorizontal: 10,
     alignContent: "center",
     paddingBottom: 20,

@@ -7,6 +7,7 @@ import Login from "./screens/Login";
 import Home from "./screens/Home";
 import Signup from "./screens/Signup";
 import Cart from "./screens/Cart";
+import Description from "./screens/Description";
 
 
 
@@ -26,6 +27,8 @@ export default function App() {
           <MainNavigator.Screen name="Home" component={Home} />
 
           <MainNavigator.Screen name="cart" component={Cart} />
+
+          <MainNavigator.Screen name="Description" component={Description} />
 
 
 
